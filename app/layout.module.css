@@ -1,13 +1,13 @@
 .header {
-  background-color: var(--white);
-  box-shadow: 0 2px 8px var(--shadow);
+  background: linear-gradient(135deg, var(--cafe-espresso) 0%, var(--cafe-dark) 100%);
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .headerContent {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 1.5rem 2rem;
   display: flex;
@@ -16,41 +16,82 @@
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--tea-brown);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--soft-white);
+  letter-spacing: 0.05em;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .nav {
   display: flex;
-  gap: 2rem;
-  font-size: 1rem;
-  color: var(--text-dark);
+  gap: 3rem;
+  font-size: 0.95rem;
+  color: var(--cafe-cream);
+  font-weight: 500;
+  font-family: 'Georgia', serif;
+}
+
+.nav a {
+  position: relative;
+  padding: 0.5rem 0;
+  letter-spacing: 0.05em;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--cafe-gold);
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
 }
 
 .mainContent {
-  min-height: calc(100vh - 160px);
-  padding: 2rem;
+  min-height: calc(100vh - 140px);
+  padding: 0;
 }
 
 .footer {
-  background-color: var(--tea-dark);
-  color: var(--cream);
-  text-align: ceaaanter;
-  padding: 2rem;
-  margin-top: 4rem;
+  background: linear-gradient(to top, var(--cafe-espresso) 0%, var(--cafe-dark) 100%);
+  color: var(--cafe-beige);
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 0;
+  border-top: 3px solid var(--cafe-gold);
+  font-family: 'Georgia', serif;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
 }
 
 @media (max-width: 768px) {
   .headerContent {
     flex-direction: column;
     gap: 1rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
   }
 
   .nav {
-    gap: 1.5rem;
+    gap: 2rem;
+    font-size: 0.9rem;
   }
 }

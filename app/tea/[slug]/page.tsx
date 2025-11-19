@@ -32,21 +32,23 @@ export default async function TeaDetailPage({ params }: Props) {
 
       <article className={styles.teaDetail}>
         <div className={styles.teaHeader}>
-          <div className={styles.teaImageContainer}>
-            <Image
-              src={tea.image.url}
-              alt={tea.title}
-              width={tea.image.width}
-              height={tea.image.height}
-              className={styles.teaDetailImage}
-              priority
-            />
-          </div>
-          <div className={styles.teaInfo}>
-            <div className={styles.categoryTag}>{tea.category}</div>
-            <h1 className={styles.teaName}>{tea.title}</h1>
-            <p className={styles.teaOriginDetail}>🌍 原産地: {tea.origin}</p>
-            <p className={styles.teaDescriptionDetail}>{tea.description}</p>
+          <div className={styles.teaHeaderContent}>
+            <div className={styles.teaImageContainer}>
+              <Image
+                src={tea.image.url}
+                alt={tea.title}
+                width={tea.image.width}
+                height={tea.image.height}
+                className={styles.teaDetailImage}
+                priority
+              />
+            </div>
+            <div className={styles.teaInfo}>
+              <div className={styles.categoryTag}>{tea.category}</div>
+              <h1 className={styles.teaName}>{tea.title}</h1>
+              <p className={styles.teaOriginDetail}>🌍 {tea.origin}</p>
+              <p className={styles.teaDescriptionDetail}>{tea.description}</p>
+            </div>
           </div>
         </div>
 
@@ -60,7 +62,7 @@ export default async function TeaDetailPage({ params }: Props) {
             <h2 className={styles.sectionTitle}>☕ 淹れ方</h2>
             <p className={styles.sectionContent}>{tea.brewingMethod}</p>
             <div className={styles.temperatureBox}>
-              <span className={styles.tempLabel}>推奨温度:</span>
+              <span className={styles.tempLabel}>推奨温度</span>
               <span className={styles.tempValue}>{tea.temperature}</span>
             </div>
           </section>
