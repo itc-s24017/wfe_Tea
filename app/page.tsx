@@ -19,21 +19,20 @@ export default function Home() {
 
       <section className={styles.features}>
         <div className={styles.featuresGrid}>
-          <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>🌍</div>
-            <h3>世界の産地</h3>
-            <p>インド、スリランカ、中国など、世界各地の紅茶をお届けします。</p>
-          </div>
+        <a href="/types" className={styles.featureCard}>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>🍵</div>
             <h3>豊富な種類</h3>
             <p>ブラックティー、グリーンティー、ハーブティーなど多彩なラインナップ。</p>
           </div>
+        </a>
+        <a href="/brewing" className={styles.featureCard}>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>📖</div>
             <h3>淹れ方ガイド</h3>
             <p>それぞれの紅茶に最適な淹れ方をご紹介しています。</p>
           </div>
+          </a>
         </div>
       </section>
     </div>

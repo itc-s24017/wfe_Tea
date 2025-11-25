@@ -21,6 +21,24 @@ export type Tea = {
   publishedAt: string;
 };
 
+// 紅茶比較表の型定義
+export type TeaComparison = {
+  id: string;
+  brand: string;
+  type: string;
+  aroma: string;
+  taste: string;
+  colorDescription: string;
+  colorCode: string;
+  recommendedMethods: string[]; // 複数選択（配列）
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  categories: {
+    name: string;
+  };
+};
+
 // 淹れ方ガイドの型定義（リッチエディタ形式）
 export type BrewingGuide = {
   id: string;
@@ -122,6 +140,19 @@ export const getBrewingList = async () => {
     return data.contents as BrewingGuide[];
   } catch (error) {
     console.error('淹れ方一覧の取得に失敗しました:', error);
+    return [];
+  }
+};
+
+// 紅茶比較表を取得
+export const getComparisonList = async () => {
+  try {
+    const data = await client.get({
+      endpoint: 'comparison',
+    });
+    return data.contents as TeaComparison[];
+  } catch (error) {
+    console.error('比較表の取得に失敗しました:', error);
     return [];
   }
 };

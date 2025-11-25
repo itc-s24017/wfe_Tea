@@ -27,7 +27,7 @@ export default async function BrewingPage() {
                 {guide.image && (
                   <div className={styles.guideImage}>
                     <Image
-                      src={guide.image?.url}
+                      src={guide.image.url}
                       alt={guide.name}
                       width={guide.image.width}
                       height={guide.image.height}
@@ -53,40 +53,45 @@ export default async function BrewingPage() {
           <section className={styles.teaBrewingSection}>
             <h2 className={styles.mainTitle}>各紅茶の淹れ方</h2>
             <div className={styles.brewingGrid}>
-              {teas.map((tea) => (
-                <Link 
-                  href={`/tea/${tea.slug}`} 
-                  key={tea.id}
-                  className={styles.brewingCard}
-                >
-                  <div className={styles.cardHeader}>
-                    <div className={styles.imageWrapper}>
-                      <Image
-                        src={tea.image?.url}
-                        alt={tea.title}
-                        width={tea.image.width}
-                        height={tea.image.height}
-                        className={styles.teaImage}
-                      />
+              {teas.map((tea) => {
+                // 画像データがない場合はスキップ
+                if (!tea.image || !tea.image.url) return null;
+                
+                return (
+                  <Link 
+                    href={`/tea/${tea.slug}`} 
+                    key={tea.id}
+                    className={styles.brewingCard}
+                  >
+                    <div className={styles.cardHeader}>
+                      <div className={styles.imageWrapper}>
+                        <Image
+                          src={tea.image.url}
+                          alt={tea.title}
+                          width={tea.image.width}
+                          height={tea.image.height}
+                          className={styles.teaImage}
+                        />
+                      </div>
+                      <div className={styles.titleSection}>
+                        <h3 className={styles.teaTitle}>{tea.title}</h3>
+                        <p className={styles.category}>{tea.category}</p>
+                      </div>
                     </div>
-                    <div className={styles.titleSection}>
-                      <h3 className={styles.teaTitle}>{tea.title}</h3>
-                      <p className={styles.category}>{tea.category}</p>
+                    
+                    <div className={styles.brewingInfo}>
+                      <div className={styles.infoItem}>
+                        <span className={styles.label}>🌡️ 温度</span>
+                        <span className={styles.value}>{tea.temperature}</span>
+                      </div>
+                      <div className={styles.method}>
+                        <span className={styles.label}>☕ 淹れ方</span>
+                        <p className={styles.methodText}>{tea.brewingMethod}</p>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className={styles.brewingInfo}>
-                    <div className={styles.infoItem}>
-                      <span className={styles.label}>🌡️ 温度</span>
-                      <span className={styles.value}>{tea.temperature}</span>
-                    </div>
-                    <div className={styles.method}>
-                      <span className={styles.label}>☕ 淹れ方</span>
-                      <p className={styles.methodText}>{tea.brewingMethod}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </section>
         )}

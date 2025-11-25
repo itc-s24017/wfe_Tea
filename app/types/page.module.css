@@ -1,0 +1,348 @@
+.typesPage {
+  width: 100%;
+  background: var(--cafe-cream);
+}
+
+.pageHeader {
+  background: linear-gradient(135deg, var(--cafe-espresso) 0%, var(--cafe-dark) 100%);
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pageHeader::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.pageTitle {
+  font-size: 3rem;
+  color: var(--soft-white);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+}
+
+.pageDescription {
+  font-size: 1.2rem;
+  color: var(--cafe-beige);
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Georgia', serif;
+}
+
+.content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.noData {
+  text-align: center;
+  padding: 5rem 3rem;
+  background: var(--soft-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--shadow);
+  border: 1px solid var(--cafe-beige);
+}
+
+.noData p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-family: 'Georgia', serif;
+}
+
+/* 比較表セクション */
+.comparisonSection {
+  margin-bottom: 5rem;
+  background: var(--soft-white);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px var(--shadow);
+  border: 1px solid var(--cafe-beige);
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  color: var(--cafe-espresso);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--cafe-gold);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Georgia', serif;
+  background: var(--soft-white);
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  border: 2px solid var(--cafe-beige);
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.comparisonTable thead th {
+  background: linear-gradient(135deg, var(--cafe-brown) 0%, var(--cafe-dark) 100%);
+  color: var(--soft-white);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.cornerCell {
+  background: var(--cafe-cream) !important;
+}
+
+.originHeader {
+  background: linear-gradient(135deg, var(--cafe-brown) 0%, var(--cafe-dark) 100%) !important;
+  color: var(--soft-white) !important;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.brandHeader {
+  background: var(--cafe-latte) !important;
+  color: var(--cafe-espresso) !important;
+  font-size: 1rem;
+  padding: 1rem 0.75rem !important;
+}
+
+.typeText {
+  font-size: 0.85rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
+  color: var(--cafe-dark);
+}
+
+.typeHeader {
+  background: var(--cafe-latte) !important;
+  color: var(--cafe-espresso) !important;
+  font-size: 0.95rem;
+}
+
+.rowLabel {
+  background: var(--cafe-cream);
+  font-weight: 600;
+  color: var(--cafe-espresso);
+  font-size: 0.95rem;
+  width: 120px;
+}
+
+.comparisonTable tbody td {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.colorCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto 0.5rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  border: 2px solid var(--cafe-beige);
+}
+
+.colorDesc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.methodItem {
+  text-align: left;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.categorySection {
+  display: none;
+}
+
+.categoryTitle {
+  margin-bottom: 5rem;
+}
+
+.categorySection:last-child {
+  margin-bottom: 0;
+}
+
+.categoryTitle {
+  font-size: 2rem;
+  color: var(--cafe-espresso);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--cafe-gold);
+  display: inline-block;
+}
+
+.teaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.teaCard {
+  background: var(--soft-white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: all 0.3s ease;
+  display: block;
+  border: 1px solid var(--cafe-beige);
+  padding: 2rem;
+}
+
+.teaCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px var(--shadow-hover);
+}
+
+.teaImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: var(--cafe-cream);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.teaImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.teaCard:hover .teaImage {
+  transform: scale(1.08);
+}
+
+.teaInfo {
+  padding: 1.5rem;
+}
+
+.teaType {
+  font-size: 0.85rem;
+  color: var(--cafe-latte);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  font-family: 'Georgia', serif;
+}
+
+.teaAroma,
+.teaTaste {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+}
+
+.teaTitle {
+  font-size: 1.3rem;
+  color: var(--cafe-espresso);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.teaOrigin {
+  font-size: 0.9rem;
+  color: var(--cafe-brown);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  font-family: 'Georgia', serif;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.teaDescription {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.9rem;
+  font-family: 'Georgia', serif;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+
+  .pageTitle {
+    font-size: 2.2rem;
+  }
+
+  .pageDescription {
+    font-size: 1.05rem;
+  }
+
+  .content {
+    padding: 3rem 1.5rem;
+  }
+
+  .comparisonSection {
+    padding: 2rem 1.5rem;
+  }
+
+  .tableWrapper {
+    overflow-x: scroll;
+  }
+
+  .comparisonTable {
+    font-size: 0.85rem;
+  }
+
+  .comparisonTable th,
+  .comparisonTable td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .colorCircle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .categorySection {
+    margin-bottom: 3rem;
+  }
+
+  .categoryTitle {
+    font-size: 1.6rem;
+  }
+
+  .teaGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
