@@ -3,19 +3,52 @@ import { createClient } from 'microcms-js-sdk';
 // 紅茶データの型定義
 export type Tea = {
   id: string;
-  title: string;
-  slug: string;
-  image: {
+  brand: string;
+  type?: string;
+  aroma: string;
+  taste: string;
+  colorDescription: string;
+  colorCode?: string;
+  recommendedMethods?: string[];
+  categories?: {
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    revisedAt: string;
+  };
+  // 以下は詳細ページ用（あれば）
+  title?: string;
+  slug?: string;
+  image?: {
     url: string;
     height: number;
     width: number;
   };
-  description: string;
-  origin: string;
-  flavor: string;
-  brewingMethod: string;
-  temperature: string;
-  category: string;
+  description?: string;
+  origin?: string;
+  flavor?: string;
+  brewingMethod?: string;
+  temperature?: string;
+  category?: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+};
+
+// ニュースの型定義
+export type News = {
+  id: string;
+  title: string;
+  category: string; // プレスリリース、お知らせ
+  date: string;
+  image?: {
+    url: string;
+    height: number;
+    width: number;
+  };
+  content: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
@@ -34,9 +67,6 @@ export type TeaComparison = {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  categories: {
-    name: string;
-  };
 };
 
 // 淹れ方ガイドの型定義（リッチエディタ形式）
@@ -94,6 +124,9 @@ export const getTeaList = async () => {
   try {
     const data = await client.get({
       endpoint: 'tea',
+      queries: {
+        limit: 20, 
+      },
     });
     return data.contents as Tea[];
   } catch (error) {
@@ -156,3 +189,19 @@ export const getComparisonList = async () => {
     return [];
   }
 };
+
+// // ニュース一覧を取得
+// export const getNewsList = async () => {
+//   try {
+//     const data = await client.get({
+//       endpoint: 'news',
+//       queries: {
+//         orders: '-date', // 日付の降順
+//       },
+//     });
+//     return data.contents as News[];
+//   } catch (error) {
+//     console.error('ニュースの取得に失敗しました:', error);
+//     return [];
+//   }
+// };

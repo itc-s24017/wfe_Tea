@@ -1,40 +1,24 @@
-import { getTeaList, getComparisonList } from '../_libs/microcms';
-import Link from 'next/link';
-import Image from 'next/image';
+import { getTeaList } from '../_libs/microcms';
 import styles from './page.module.css';
 
 export const revalidate = 60;
 
 export default async function TypesPage() {
   const teas = await getTeaList();
-  const comparisons = await getComparisonList();
   
-  // デバッグ: コンソールに出力
-  console.log('取得した比較データ:', comparisons);
-  console.log('比較データの数:', comparisons.length);
+  console.log('取得した紅茶データ:', teas);
   
   // 産地（categories.name）別にグループ化
-  const comparisonByOrigin = comparisons.reduce((acc, comp) => {
-    const origin = comp.categories?.name || '未分類';
-    console.log(`ブランド: ${comp.brand}, 産地: ${origin}`);
+  const teaByOrigin = teas.reduce((acc, tea) => {
+    const origin = tea.categories?.name || '未分類';
     if (!acc[origin]) {
       acc[origin] = [];
     }
-    acc[origin].push(comp);
+    acc[origin].push(tea);
     return acc;
-  }, {} as Record<string, typeof comparisons>);
+  }, {} as Record<string, typeof teas>);
 
-  const origins = Object.keys(comparisonByOrigin);
-  console.log('産地一覧:', origins);
-
-  // ブランドでグループ化
-  const comparisonByBrand = comparisons.reduce((acc, comp) => {
-    if (!acc[comp.brand]) {
-      acc[comp.brand] = [];
-    }
-    acc[comp.brand].push(comp);
-    return acc;
-  }, {} as Record<string, typeof comparisons>);
+  const origins = Object.keys(teaByOrigin);
 
   return (
     <div className={styles.typesPage}>
@@ -47,65 +31,82 @@ export default async function TypesPage() {
 
       <div className={styles.content}>
         {/* 比較表セクション */}
-        {comparisons.length > 0 && (
+        {teas.length > 0 && (
           <section className={styles.comparisonSection}>
             <h2 className={styles.sectionTitle}>紅茶比較表</h2>
             <div className={styles.tableWrapper}>
               <table className={styles.comparisonTable}>
                 <thead>
                   <tr>
-                    <th></th>
-                    {Object.keys(comparisonByBrand).map((brand) => (
-                      <th key={brand} colSpan={comparisonByBrand[brand].length}>
-                        {brand}
+                    <th className={styles.cornerCell}></th>
+                    {origins.map((origin) => (
+                      <th key={origin} colSpan={teaByOrigin[origin].length} className={styles.originHeader}>
+                        {origin}
                       </th>
                     ))}
                   </tr>
                   <tr>
-                    <th></th>
-                    {comparisons.map((comp) => (
-                      <th key={comp.id} className={styles.typeHeader}>
-                        {comp.type}
-                      </th>
-                    ))}
+                    <th className={styles.cornerCell}></th>
+                    {origins.map((origin) =>
+                      teaByOrigin[origin].map((tea) => (
+                        <th key={tea.id} className={styles.brandHeader}>
+                          {tea.brand}
+                          {tea.type && <div className={styles.typeText}>{tea.type}</div>}
+                        </th>
+                      ))
+                    )}
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td className={styles.rowLabel}>香り</td>
-                    {comparisons.map((comp) => (
-                      <td key={comp.id}>{comp.aroma}</td>
-                    ))}
+                    {origins.map((origin) =>
+                      teaByOrigin[origin].map((tea) => (
+                        <td key={tea.id}>{tea.aroma || '-'}</td>
+                      ))
+                    )}
                   </tr>
                   <tr>
                     <td className={styles.rowLabel}>味</td>
-                    {comparisons.map((comp) => (
-                      <td key={comp.id}>{comp.taste}</td>
-                    ))}
+                    {origins.map((origin) =>
+                      teaByOrigin[origin].map((tea) => (
+                        <td key={tea.id}>{tea.taste || '-'}</td>
+                      ))
+                    )}
                   </tr>
                   <tr>
-                    <td className={styles.rowLabel}>紅茶の色<br />（水色）<br />のイメージ</td>
-                    {comparisons.map((comp) => (
-                      <td key={comp.id}>
-                        <div 
-                          className={styles.colorCircle}
-                          style={{ backgroundColor: comp.colorCode }}
-                        ></div>
-                        <p className={styles.colorDesc}>{comp.colorDescription}</p>
-                      </td>
-                    ))}
+                    <td className={styles.rowLabel}>紅茶の色（水色）のイメージ</td>
+                    {origins.map((origin) =>
+                      teaByOrigin[origin].map((tea) => (
+                        <td key={tea.id}>
+                          {tea.colorCode && (
+                            <div 
+                              className={styles.colorCircle}
+                              style={{ backgroundColor: tea.colorCode }}
+                            ></div>
+                          )}
+                          {tea.colorDescription && (
+                            <p className={styles.colorDesc}>{tea.colorDescription}</p>
+                          )}
+                          {!tea.colorCode && !tea.colorDescription && <p>-</p>}
+                        </td>
+                      ))
+                    )}
                   </tr>
                   <tr>
-                    <td className={styles.rowLabel}>おすすめの<br />飲み方</td>
-                    {comparisons.map((comp) => (
-                      <td key={comp.id}>
-                        {comp.recommendedMethods && comp.recommendedMethods.map((method, idx) => (
-                          <div key={idx} className={styles.methodItem}>
-                            ☑ {method}
-                          </div>
-                        ))}
-                      </td>
-                    ))}
+                    <td className={styles.rowLabel}>おすすめの飲み方</td>
+                    {origins.map((origin) =>
+                      teaByOrigin[origin].map((tea) => (
+                        <td key={tea.id}>
+                          {tea.recommendedMethods && tea.recommendedMethods.map((method, idx) => (
+                            <div key={idx} className={styles.methodItem}>
+                              ☑ {method}
+                            </div>
+                          ))}
+                          {(!tea.recommendedMethods || tea.recommendedMethods.length === 0) && <p>-</p>}
+                        </td>
+                      ))
+                    )}
                   </tr>
                 </tbody>
               </table>
@@ -113,33 +114,10 @@ export default async function TypesPage() {
           </section>
         )}
 
-        {/* 産地別比較データセクション */}
-        {comparisons.length === 0 ? (
+        {teas.length === 0 && (
           <div className={styles.noData}>
-            <p>比較データがまだ登録されていません。</p>
+            <p>紅茶データがまだ登録されていません。</p>
           </div>
-        ) : origins.length === 0 ? (
-          <div className={styles.noData}>
-            <p>産地が設定されていません。microCMSでカテゴリーを設定してください。</p>
-          </div>
-        ) : (
-          origins.map((origin) => (
-            <section key={origin} className={styles.categorySection}>
-              <h2 className={styles.categoryTitle}>{origin}</h2>
-              <div className={styles.teaGrid}>
-                {comparisonByOrigin[origin].map((comp) => (
-                  <div key={comp.id} className={styles.teaCard}>
-                    <div className={styles.teaInfo}>
-                      <h3 className={styles.teaTitle}>{comp.brand}</h3>
-                      {comp.type && <p className={styles.teaType}>{comp.type}</p>}
-                      <p className={styles.teaAroma}>🌸 {comp.aroma}</p>
-                      <p className={styles.teaTaste}>☕ {comp.taste}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          ))
         )}
       </div>
     </div>

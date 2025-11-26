@@ -148,6 +148,7 @@
   color: var(--cafe-espresso);
   font-size: 0.95rem;
   width: 120px;
+  white-space: normal;
 }
 
 .comparisonTable tbody td {
