@@ -1,5 +1,9 @@
 # 紅茶紹介サイト  
 
+## 使用した技術  
+next.js  
+microCMS  
+
 ## ページ構成  
 /app ホーム  
 /app/types 紅茶の種類  
